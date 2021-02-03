@@ -1,0 +1,111 @@
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	font-family: "Andale Mono",'Montserrat', sans-serif;
+	color:white;
+}
+
+body{
+	//background:#344653;
+	background-image: url('../images/background_website.JPG') ;
+	background-image:no-repeat;
+	//background-size: cover;
+}
+
+header{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:10%;
+	box-sizing:border-box;
+	background:#143B58;
+
+	z-index:10;
+	//background-size: cover;
+	//border:3px;
+
+}
+nav{
+	
+	
+	text-align: center;
+	float:right;
+
+}
+nav a{
+	display:inline-block;
+	margin:0 12px;
+	padding-top:20px;
+	padding-bottom:16px;
+	text-decoration: none;
+	color:rgba(255,255,255,0.67);
+	transition:color 0.3s;
+}
+
+ul li  {
+	display:flex;
+	float :right;
+	padding:5px;
+	justify-content:center;
+
+
+}
+/*
+.slide{
+	
+}
+.wrapper{
+	display:flex;
+	justify-content: center;
+	overflow-x:scroll;
+	//height:100px;
+	//width:100px;
+	
+}
+
+.carousel-item {
+	display:flex;
+	justify-content: space-between;
+	width:100px;
+	height:100px;
+	overflow:hidden;
+}
+*/
+/*
+.slides{
+	display:flex;
+	justify-content: center;
+	width:500px;
+	height:600px;
+}
+*/
+div .slide{
+	display:block;
+	justify-content:center;
+}
+.slides {
+	display:flex;
+	text-align:center;
+	justify-content:center;
+	
+	overflow:auto;
+	width:500px;
+	height:600px;
+
+}
+.slides::-webkit-scrollbar{
+	display:none;
+}
+.carousel slide pointer-event{
+	display:flex;
+	justify-content: center;
+}
+
+.grey{
+	display:flex;
+	justify-content:center;
+}
+
+//--------------------------------------------------------------------------------

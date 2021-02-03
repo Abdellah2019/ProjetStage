@@ -2,6 +2,9 @@
 var ulContextes = document.getElementById("contexteList");
 /** menu contenant les sous thémes */
 var subulContextes = document.getElementById("subcontexteList");
+//-----------MES VARIABLES----------------------------------
+var My_Contextes=[]
+var My_Concepts=[]
 
 /** DOV contenant les images */
 var divImages = document.getElementById("photo");
@@ -12,7 +15,7 @@ parser = new DOMParser();
 var xmlDoc = parser.parseFromString(conceptsString, "text/xml");
 var xmlDocVideo = parser.parseFromString(videoString, "text/xml");
 
-
+var Donnee=[]
 /* Fonction exécutée lors du click sur un théme */
 function selectContext(e) {
     if (e.target.nodeName == "LI") {
@@ -112,11 +115,13 @@ function displayImages(pConceptName) {
 
     images = images.sort(compareWeightDesc);
     displayImagesAndLoad(images);
+    
 }
 
 /** Affiche les images passée en paramètres */
 function displayImagesAndLoad(images) {
     divImages.innerHTML = '';
+    Donnee=[]
     for (var j = 0; j < images.length; j++) {
         //var figure = document.createElement("figure");
         var img = document.createElement("img");
@@ -124,8 +129,14 @@ function displayImagesAndLoad(images) {
         // var figcaption = document.createElement("figcaption");
         // figcaption.appendChild(document.createTextNode(images[j].weight));
         img.src = images[j].name;
+        Donnee[j]=images[j].name
         div.className = "slide"
         img.className = "borderwhite";
+
+        //div.className="carousel-item"
+        //img.className="d-block w-100"
+
+
         //figure.appendChild(img);
         //figure.appendChild(figcaption);
         divImages.appendChild(div);
@@ -141,6 +152,8 @@ function displayContextes() {
 
     for (var i = 0; i < Contextes.length; i++) {
         var Contexte = Contextes[i].getAttribute('Name');
+        //-----------------MES CONTEXTES--------------------
+        My_Contextes[i]=Contexte
         var ulSubList = document.createElement("ul");
 
         ulSubList.id = "id" + Contexte;
@@ -148,9 +161,13 @@ function displayContextes() {
         ulSubList.style.display = "none";
         var concepts = Contextes[i].getElementsByTagName("concept");
 
+
         for (var j = 0; j < concepts.length; j++) {
             var ConceptWeight = concepts[j].getAttribute('Weight');
             var conceptName = concepts[j].getAttribute('ConceptName');
+
+             //-----------MES CONCEPTS----------------------------
+            My_Concepts[j]=conceptName
 
             var liSubList = document.createElement("li");
 
@@ -180,7 +197,9 @@ function displayContextes() {
         ulContextes.appendChild(li);
 
 
+
     }
+    console.log('bal'+My_Concepts)
 
     displayFirst();
 }
@@ -191,3 +210,60 @@ function displayFirst(){
 
 /** document chargé, on appel pageLoaded */
 document.addEventListener('DOMContentLoaded', pageLoaded, false);
+
+//-------------------------------------------------------------------------
+//=========================================================================
+//-------------------------------------------------------------------------
+
+function My_Concepts(search){
+    My_Concepts=[]
+    var Contextes = xmlDoc.childNodes[0].getElementsByTagName("Contexte");
+
+    for (var i = 0; i < Contextes.length; i++) {
+        var Contexte = Contextes[i].getAttribute('Name');
+        //-----------------MES CONTEXTES--------------------
+        My_Contextes[i]=Contexte
+        var ulSubList = document.createElement("ul");
+
+        ulSubList.id = "id" + Contexte;
+        ulSubList.className = 'weighted';
+        ulSubList.style.display = "none";
+        var concepts = Contextes[i].getElementsByTagName("concept");
+
+
+        for (var j = 0; j < concepts.length; j++) {
+            var ConceptWeight = concepts[j].getAttribute('Weight');
+            var conceptName = concepts[j].getAttribute('ConceptName');
+            if(conceptName==search){
+                My_Concepts.push(conceptName)
+            }
+
+             //-----------MES CONCEPTS----------------------------
+            
+
+            var liSubList = document.createElement("li");
+
+            var aliSubList = document.createElement("a");
+            aliSubList.href = 'javascript:void:(0);';
+
+            var finalWeight = ConceptWeight.replace(",", ".") * 100 + "px";
+
+            aliSubList.style.fontSize = finalWeight;
+            aliSubList.setAttribute("dataweight", ConceptWeight.replace(",", ".") * 40);
+
+            aliSubList.appendChild(document.createTextNode(conceptName));
+            aliSubList.addEventListener("click", function () { displayImages(this.innerText); });
+
+            liSubList.appendChild(aliSubList);
+            ulSubList.appendChild(liSubList);
+
+        }
+
+        var li = document.createElement("li");
+        li.id = Contexte;
+        li.appendChild(document.createTextNode(Contexte));
+        li.append(ulSubList);
+        ulContextes.appendChild(li);
+    }
+    console.log(My_Concepts)
+}
