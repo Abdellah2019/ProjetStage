@@ -8,7 +8,9 @@
 
 body{
 	//background:#344653;
-	background-image: url('../images/background_website.JPG')
+	background-image: url('../images/background.jpg');
+    //background-image:no-repeat;
+    background-size: cover;
 }
 
 header{
@@ -31,6 +33,14 @@ nav{
 	text-align: center;
 	float:right;
 
+}
+#resultat{
+    
+    margin-left:calc(50%);
+    text-decoration:none;
+    list-style: none;
+    color:black;
+    //margin-left:30px;
 }
 .searchbar{
     margin-bottom: auto;

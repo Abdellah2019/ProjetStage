@@ -8,9 +8,9 @@
 
 body{
 	//background:#344653;
-	background-image: url('../images/background_website.JPG') ;
-	background-image:no-repeat;
-	//background-size: cover;
+	background-image: url('../images/background.jpg') ;
+	//background-image:no-repeat;
+	background-size: cover;
 }
 
 header{
@@ -102,10 +102,22 @@ div .slide{
 	display:flex;
 	justify-content: center;
 }
-
-.grey{
+h2 .z-layer:first-child{
+	//font-size:6em;
+	color:#f44336;
+}
+h2 .z-layer{
+	color:#b73229;
+}
+h2{
 	display:flex;
 	justify-content:center;
+
+}
+.grey{
+	//display:flex;
+	//justify-content:center;
+	font-size:8em;
 }
 
 //--------------------------------------------------------------------------------
